@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'weblog.apps.user',
     'weblog.apps.relation',
+    'weblog.apps.blog',
+    'weblog.apps.article'
 ]
 
 MIDDLEWARE = [
