@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'weblog.apps.user',
+    'weblog.apps.relation',
     'weblog.apps.blog',
     'weblog.apps.article'
 ]
