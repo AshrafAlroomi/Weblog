@@ -1,7 +1,7 @@
 from django.db import models
 from weblog.apps.user.models import User
 from weblog.apps.blog.models import Blog
-from weblog.utlis.membership import MEMBERSHIP_STATUS, MEMBER_ROLE
+from weblog.utlis.membership import MEMBERSHIP_STATUS, MEMBER_ROLE, NON
 
 
 class UserFollow(models.Model):
@@ -13,7 +13,7 @@ class UserFollow(models.Model):
 class Membership(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    user_role = models.CharField(max_length=10, choices=MEMBER_ROLE)
+    user_role = models.CharField(max_length=10, choices=MEMBER_ROLE, default=NON)
     join_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=MEMBERSHIP_STATUS)
 
