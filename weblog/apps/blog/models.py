@@ -37,7 +37,8 @@ class Blog(models.Model):
 
 
 class EditorPermission(models.Model):
-    permission = models.CharField(max_length=10, choices=EDITOR_PERMISSION)
+    permission = models.CharField(max_length=10, choices=EDITOR_PERMISSION, unique=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
 
 class Editor(models.Model):
