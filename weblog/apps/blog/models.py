@@ -1,11 +1,13 @@
 from django.db import models
 from weblog.apps.user.models import User
-from weblog.utlis import STATUS_CHOICES, ACTIVE
+from weblog.utlis.article import STATUS_CHOICES, ACTIVE
+from weblog.utlis.membership import MEMBERSHIP_STATUS, MEMBER_ROLE
+from weblog.utlis.editor import EDITOR_PERMISSION
 
 
 class BlogPreference(models.Model):
-    publish_policy = models.TextField(max_length=100)  # todo
-    membership_policy = models.TextField(max_length=100)  # todo
+    default_publish_policy = models.CharField(max_length=10, choices=MEMBER_ROLE)
+    default_membership_policy = models.CharField(max_length=10, choices=MEMBERSHIP_STATUS)
     style = models.JSONField()
 
     def set_membership_policy(self):
@@ -30,24 +32,23 @@ class Blog(models.Model):
             return True
         return False
 
-    def can_post(self, user):
-        if self.style.membership_policy == '':
-            pass
-        return False
-
     def is_blog_editor(self, user):
         return self.admin == user
+
+
+class EditorPermission(models.Model):
+    permission = models.CharField(max_length=10, choices=EDITOR_PERMISSION)
 
 
 class Editor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    permissions = models.TextField(max_length=20)  # todo
+    permissions = models.ManyToManyField(EditorPermission)
 
 
 class CategoryPreference(models.Model):
     style = models.JSONField()
 
 
-class BlogBlackList(models.Model):
+class BlogBlackList(models.Model):  # todo
     pass
