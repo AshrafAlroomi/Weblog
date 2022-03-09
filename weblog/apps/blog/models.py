@@ -1,6 +1,6 @@
 from django.db import models
 from weblog.apps.user.models import User
-from weblog.utlis import STATUS_CHOICES, ACTIVE
+from weblog.utlis.article import STATUS_CHOICES, ACTIVE
 
 
 class BlogPreference(models.Model):

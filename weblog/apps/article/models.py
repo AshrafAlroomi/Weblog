@@ -1,7 +1,7 @@
 from django.db import models
 from weblog.apps.blog.models import Blog
 from weblog.apps.user.models import User
-from weblog.utlis import STATUS_CHOICES
+from weblog.utlis.article import STATUS_CHOICES
 
 
 class Article(models.Model):
@@ -13,8 +13,6 @@ class Article(models.Model):
     body = models.TextField(max_length=3000)
     blog = models.ForeignKey(Blog, default=None, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
-
-
 
     def prepare_article(self):
         pass
